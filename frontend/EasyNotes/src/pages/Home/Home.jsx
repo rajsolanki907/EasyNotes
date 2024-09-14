@@ -7,7 +7,7 @@ import Modal from 'react-modal';
 
 const Home = () => {
 
-  const [openAddEditModal, setOPenAddEditModal] =useState({
+  const [openAddEditModal, setOpenAddEditModal] =useState({
     isShow: false,
     type:"add",
     date: null,
@@ -32,7 +32,7 @@ const Home = () => {
 
     <button className="w-14 h-16 flex items-center justify-center rounded-2xl bg-primary hover:gb-blue-600 absolute right-10 bottom-10" 
             onClick={() => {
-              setOPenAddEditModal({ isShow:true, type: "add", date:null });
+              setOpenAddEditModal({ isShow:true, type: "add", date:null });
             }}>
       <MdAdd className="text-[32px] text-white"/>
     </button>
@@ -50,7 +50,7 @@ const Home = () => {
     >
     <AddEditNotes
     onClose={() => {
-      setOPenAddEditModal({ isShown: false, type: "add", data: null})
+      setOpenAddEditModal({ isShown: false, type: "add", data: null})
     }}
     />
     </Modal>
