@@ -2,7 +2,7 @@
 # EasyNotes
 
 EasyNotes is a simple note-taking application built with Node.js, Express, MongoDB, and React.
-<br> It allows users to create, edit, and manage their notes.
+It allows users to create, edit, and manage their notes.
 
 ## Features
 
