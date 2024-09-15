@@ -1,5 +1,5 @@
 import React , { useState }  from 'react'
-import Navbar from '../../components/Navbar/Navbar';
+import Navbar_signup from '../../components/Navbar/Navbar_signup';
 import PassswordInput from '../../components/Input/PassswordInput';
 import { Link } from 'react-router-dom';
 import { validateEmail } from '../../utils/helper';
@@ -31,7 +31,7 @@ const SignUp = () => {
 
   return (
   <>
-    <Navbar />
+    <Navbar_signup />
     
     <div className="flex items-center justify-center mt-28">
       <div className="w-96 border rounded bg-white px-7 py-10">
