@@ -184,6 +184,88 @@ app.put("/edit-note/:noteId", authenticateToken , async (req, res) => {
 
 });
 
+//Get All Ntes Request Logic
+app.get("/get-all-notes/", authenticateToken , async (req, res) => {
+    const { user } = req.user;
+
+    try {
+        const notes = await Note.find({ userId: user._id }).sort({ IsPinned: -1});
+
+        return res.json({
+            error: false,
+            notes,
+            message: "All notes fetched successfully",
+        });
+    } catch (error) {
+        return res.status(500).json({
+            error: true,
+            message: "Internal Server Error",
+        });
+    }
+});
+
+app.delete("/delete-note/:noteId", authenticateToken , async (req, res) => {
+    const noteId = req.params.noteId;
+    const { user } = req.user;
+
+    try {
+        const note = await Note.findOne({ _id: noteId, userId: user._id});
+
+        if (!note){
+            return res.status(404).json({error: true, message: "Note not found"});
+        }
+
+        await Note.deleteOne({ _id: noteId, userId: user._id });
+
+        return res.json({
+            error: false,
+            message: "Note deleted successfully",
+        });
+    } catch (error) {
+        return res.status(500).json({
+            error: true,
+            message: "Internal Server Error",
+        });
+    }
+});
+
+//Update IsPinned Value
+app.put("/update-note-pinned/:noteId", authenticateToken , async (req, res) => {
+    const noteId = req.params.noteId;
+    const { isPinned } = req.body; 
+    const { user } = req.user;
+
+    if(!isPinned) {
+        return res.status(400).json({ error: true, message: "No changes Provided" });
+    }
+
+    try {
+        const note = await Note.findOne({ _id: noteId, userId: user._id });
+
+        if(!note) {
+            return res.status(404).json({ error: true, message: "Note not found" });
+        }
+
+        if(isPinned !== undefined) note.isPinned = isPinned || false;
+
+        await note.save();
+
+        return res.json({
+            error: false,
+            note,
+            message: "Note edited successfully",
+        });
+    } catch (error) {
+        console.error('Error editing note', error);
+        return res.status(500).json({
+            error: true,
+            message: "Internal Server Error",
+        });
+    }
+});
+
 app.listen(8000);
+
+
 
 module.exports=app;
