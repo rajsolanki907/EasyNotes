@@ -22,6 +22,7 @@ This repository contains the frontend code for the EasyNotes application.
 ```sh
 git clone https://github.com/yourusername/easynotes-frontend.git
 cd easynotes-frontend
+```
 
 
 2. Install the dependencies:
