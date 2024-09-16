@@ -1,6 +1,7 @@
 # EasyNotes Frontend
 
-EasyNotes is a simple note-taking application built with React. This repository contains the frontend code for the EasyNotes application.
+EasyNotes is a simple note-taking application built with React.
+This repository contains the frontend code for the EasyNotes application.
 
 ## Features
 
