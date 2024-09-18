@@ -107,6 +107,23 @@ app.post("/login", async (req, res) => {
     }
 });
 
+// Get User Request
+app.get("/get-user", authenticateToken, async (req, res) => {
+    const { user } = req.user;
+    const isUser = await User.findOne({ _id: user._id });
+
+    if (!isUser) {
+        return res.sendStatus(401);
+    }
+    return res.json({
+        user: { fullName: isUser.fullName, 
+                email: isUser.email ,
+                "_id": isUser._id,
+                createdOn: isUser.createdOn, },
+        message: "",
+    })
+});
+
 // Add Notes request Logic 
 app.post("/add-note", authenticateToken , async (req, res) => {
     const {title, content, tags } =req.body;
@@ -235,18 +252,15 @@ app.put("/update-note-pinned/:noteId", authenticateToken , async (req, res) => {
     const { isPinned } = req.body; 
     const { user } = req.user;
 
-    if(!isPinned) {
-        return res.status(400).json({ error: true, message: "No changes Provided" });
-    }
-
     try {
         const note = await Note.findOne({ _id: noteId, userId: user._id });
 
         if(!note) {
-            return res.status(404).json({ error: true, message: "Note not found" });
+            return res.status(404)
+            .json({ error: true, message: "Note not found" });
         }
 
-        if(isPinned !== undefined) note.isPinned = isPinned || false;
+        note.isPinned = isPinned || false;
 
         await note.save();
 
@@ -265,7 +279,5 @@ app.put("/update-note-pinned/:noteId", authenticateToken , async (req, res) => {
 });
 
 app.listen(8000);
-
-
 
 module.exports=app;
