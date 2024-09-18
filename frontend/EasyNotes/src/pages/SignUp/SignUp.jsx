@@ -1,8 +1,9 @@
 import React , { useState }  from 'react'
-import Navbar_signup from '../../components/Navbar/Navbar_signup';
+import Navbar from '../../components/Navbar/Navbar';
 import PassswordInput from '../../components/Input/PassswordInput';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { validateEmail } from '../../utils/helper';
+import axiosInstance from '../../utils/axiosInstance';
 
 const SignUp = () => {
 
@@ -11,6 +12,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [error , setError] = useState(null);
 
+  const navigate = useNavigate();
   const handleSignUp = async (e) => {
     e.preventDefault();
 
@@ -27,11 +29,37 @@ const SignUp = () => {
     return;
   }
   setError("");
+//Signup Api call
+try {
+  const response = await axiosInstance.post("/create-account",{
+    fullName: name,
+    email: email,
+    password: password,
+  })
+  
+  //Handle Successful Registration Response
+  if(response.data && response.data.error) {
+    setError(response.data.message)
+    return
+  }
+  if(response.data && response.data.accessToken){
+    localStorage.setItem("token", response.data.accessToken);
+    //Redirect to Dashboard
+    navigate("/dashboard")
+  }
+}catch (error) {
+//handle Login Error
+if(error.response && error.response.data && error.response.data.message) {
+  setError(error.response.data.message);
+} else {
+  setError("An unexpected error occured. Please try again.");
+}
+}
 };
 
   return (
   <>
-    <Navbar_signup />
+    <Navbar />
     
     <div className="flex items-center justify-center mt-28">
       <div className="w-96 border rounded bg-white px-7 py-10">
