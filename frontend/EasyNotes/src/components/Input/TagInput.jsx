@@ -49,7 +49,7 @@ const handleRemoveTag = (tagToRemove) => {
             onKeyDown={handleKeyDown}
             />
 
-            <button className="w-8 h-8 flex items-center justify-center rounded border-blue-700 hover:bg-blue-700"
+            <button className="w-8 h-8 flex items-center justify-center rounded border border-blue-700 hover:bg-blue-700"
             onClick= {() => {
                 addNewTag()
             }}
