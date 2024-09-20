@@ -3,7 +3,15 @@ import React from 'react'
 import { MdOutlinePushPin } from 'react-icons/md'
 import {MdCreate, MdDelete } from 'react-icons/md'
 
-const Notecard = ({title, date, content, tags, isPinned, onEdit, onDelete, onPinNote }) => {
+const Notecard = ({
+  title, 
+  date,
+  content,
+  tags, 
+  isPinned, 
+  onEdit, 
+  onDelete, 
+  onPinNote }) => {
   return (
     <div className="border rounded p-4 bg-white hover:shadow-xl transition-all ease-in-out">
       <div className="flex items-center justify-between">
@@ -27,6 +35,7 @@ const Notecard = ({title, date, content, tags, isPinned, onEdit, onDelete, onPin
                 />
                 <MdDelete
                 className="icon-btn hover:text-red-500"
+                onClick={onDelete}
                 />
             </div>
         </div>
