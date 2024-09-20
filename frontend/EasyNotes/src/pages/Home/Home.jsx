@@ -9,6 +9,7 @@ import axiosInstance from '../../utils/axiosInstance';
 import Toast from '../../components/ToastMessage/Toast';
 import EmptyCard from '../../components/EmptyCard/EmptyCard';
 import AddNotesImg from '../../assets/images/add-notes.svg';
+import NoDataImg from '../../assets/images/no-data.svg';
 
 
 const Home = () => {
@@ -27,12 +28,15 @@ const Home = () => {
 
   const [allNotes, setAllNotes] = useState([]);
   const [userInfo, setUserInfo] = useState(null);
+
+  const [isSearch, setIsSearch] = useState(false);
+
   const navigate = useNavigate();
 
   const handleEdit = (noteDetails) => {
     setOpenAddEditModal({ isShow: true, data: noteDetails, type: "edit" });
   };
-
+  //Toast Message
   const showToastMessage = (message, type) => {
     setShowToastMsg({
       isShow: true,
@@ -68,7 +72,8 @@ const Home = () => {
     try {
       const response = await axiosInstance.get("/get-all-notes");
       if (response.data && response.data.notes) {
-        setAllNotes(response.data.notes);
+        const sortedNotes = response.data.notes.sort((a, b) => b.isPinned - a.isPinned);
+        setAllNotes(response.data.notes, sortedNotes);
       }
     } catch (error) {
       console.log("An unexpected error occured while fetching notes");
@@ -97,6 +102,43 @@ const Home = () => {
     }
   }
 
+  //Search for a Note
+  const onSearchNote = async (query) => {
+    try {
+      const response = await axiosInstance.get("/search-notes", {
+        params: { query },
+      });
+      if (response.data && response.data.notes) {
+        setIsSearch(true);
+        setAllNotes(response.data.notes);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  //Pin Note Api Integration
+  const updateIsPinned = async (noteData) => {
+    const noteId = noteData._id;
+    
+    try {
+      const response = await axiosInstance.put("/update-note-pinned/" + noteId, {
+         "isPinned": !noteData.isPinned,
+      })
+      if(response.data && response.data.note) {
+        showToastMessage("Note Updated Successfully")
+        getAllNotes();
+      }
+    }catch (error) {
+      console.log(error);  
+    }  
+  };
+
+  const handleClearSearch = () => {
+    setIsSearch(false);
+    getAllNotes();
+  }
+
   useEffect(() => {
     getAllNotes();
     getUserInfo();
@@ -105,7 +147,11 @@ const Home = () => {
 
   return (
     <>
-    <Navbar userInfo={userInfo}/>
+    <Navbar 
+      userInfo={userInfo} 
+      onSearchNote = {onSearchNote}
+      handleClearSearch = {handleClearSearch}
+    />
     <div className="container mx-auto">
       {allNotes.length > 0 ? (<div className="grid grid-cols-3 gap-4 mt-8">
         {allNotes.map((item, index) => (
@@ -118,12 +164,14 @@ const Home = () => {
             isPinned={item.isPinned}
             onEdit={()=> handleEdit(item)}
             onDelete={()=> deleteNote(item)}
-            onPinNote={()=>{}}
+            onPinNote={()=> updateIsPinned(item)}
             />
         ))}
       </div>
-      ): ( <EmptyCard imgSrc={AddNotesImg} 
-        message={`Start creating your first note! Click the 'Add' button to write down your
+      ): ( <EmptyCard imgSrc={isSearch ? NoDataImg : AddNotesImg} 
+        message={isSearch 
+          ? `Oops! No notes found matching your search.` 
+          : `Start creating your first note! Click the 'Add' button to write down your
          thoughts, ideas, and reminders. Lets get Started!`}/>
       )}
     </div>
