@@ -201,7 +201,7 @@ app.put("/edit-note/:noteId", authenticateToken , async (req, res) => {
 
 });
 
-//Get All Ntes Request Logic
+//Get All Notes Request Logic
 app.get("/get-all-notes/", authenticateToken , async (req, res) => {
     const { user } = req.user;
 
