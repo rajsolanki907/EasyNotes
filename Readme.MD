@@ -9,7 +9,7 @@ Here are some sample images of the project:
 
 ![Home Page](./Sample%20Images/home%20screen.png)
 
-![Add Notes](./Sample%20Images/Add%20Notes.png)
+![Add Notes](./Sample%20Images/Add%20notes.png)
 
 ![Search Notes](./Sample%20Images/Search%20Notes.png)
 
