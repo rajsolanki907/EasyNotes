@@ -4,12 +4,13 @@
 
 Here are some sample images of the project:
 
-![Login page](../EasyNotes/Sample%20Images/login_page.png)
 
-![Home Page](../Easynotes/Sample%20Images/home%20screen.png)
+![Login page](./Sample%20Images/login_page.png)
 
-![Add Notes](../Easynotes/Sample%20Images/Add%Notes.png)
+![Home Page](./Sample%20Images/home%20screen.png)
 
-![Search Notes](../EasyNotes/Sample%20Images/Search%20Notes.png)
+![Add Notes](./Sample%20Images/Add%20Notes.png)
 
-![Update Notes](../EasyNotes/Sample%20Images/update%20notes.png)
+![Search Notes](./Sample%20Images/Search%20Notes.png)
+
+![Update Notes](./Sample%20Images/update%20notes.png)
