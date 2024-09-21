@@ -221,6 +221,7 @@ app.get("/get-all-notes/", authenticateToken , async (req, res) => {
     }
 });
 
+//Delete a Note Request
 app.delete("/delete-note/:noteId", authenticateToken , async (req, res) => {
     const noteId = req.params.noteId;
     const { user } = req.user;

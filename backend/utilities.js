@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-const { model } = require('mongoose');
 
 function authenticateToken(req, res, next) {
     const authHeader = req.headers["authorization"];
@@ -8,7 +7,7 @@ function authenticateToken(req, res, next) {
     if(!token) return res.sendStatus(401);
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-        if (err) return res.sendStatud(41);
+        if (err) return res.sendStatus(401)
         req.user = user;
         next();
     });
