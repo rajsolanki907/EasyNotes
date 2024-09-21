@@ -12,25 +12,24 @@ This repository contains the frontend code for the EasyNotes application.
 
 ## Prerequisites
 
-- Node.js
-- npm or yarn
+- JavaScript
+- React.js
+
 
 ## Installation
 
 1. Clone the repository:
 
 ```sh
-git clone https://github.com/yourusername/easynotes-frontend.git
-cd easynotes-frontend
+git clone https://github.com/yourusername/easynotes-easynotes.git
+cd easynotes-easynotes
 ```
 
 
 2. Install the dependencies:
 
 ```sh
-npm install
-# or
-yarn install
+npm i
 ```
 
 3. Start the development server:
@@ -46,7 +45,7 @@ The application will be available at `http://localhost:3000`.
 ## Project Structure
 
 ```plaintext
-easynotes-frontend/
+easynotes-easynotes/
 ├── public/
 │   ├── index.html
 │   └── ...
@@ -70,7 +69,5 @@ easynotes-frontend/
 
 In the project directory, you can run:
 
-### `npm start` or `yarn start`
+## `npm run dev`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
