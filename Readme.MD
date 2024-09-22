@@ -1,5 +1,11 @@
 # EasyNotes
 
+    ## EasyNotes - FrontEnd (Client side)
+    
+    ## backend - Backend & DB (Server side)
+
+    ## Sample Images - Project Images
+
 ## Sample Images
 
 Here are some sample images of the project:
