@@ -1,8 +1,8 @@
 require("dotenv").config();
 
-const config = require("./config.json");
+//const config = require("./config.json");
 const mongoose = require("mongoose");
-mongoose.connect(config.connectionString);
+mongoose.connect(process.env.Connection_String);
 
 const User = require("./models/user.model");
 const Note= require("./models/note.model");
@@ -22,6 +22,7 @@ app.use(
     })
 );
 
+//Landing Page Route
 app.post("/", async(req, res) =>{
     const { fullName, email, password } =req.body;
 
