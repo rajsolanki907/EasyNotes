@@ -1,6 +1,6 @@
 # EasyNotes
 
-    ## EasyNotes - FrontEnd (Client side)
+    ## frontend - FrontEnd (Client side)
     
     ## backend - Backend & DB (Server side)
 
