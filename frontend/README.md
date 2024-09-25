@@ -21,8 +21,7 @@ This repository contains the frontend code for the EasyNotes application.
 1. Clone the repository:
 
 ```sh
-git clone https://github.com/yourusername/easynotes-easynotes.git
-cd easynotes-easynotes
+https://github.com/rajsolanki907/EasyNotes.git
 ```
 
 

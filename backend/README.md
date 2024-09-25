@@ -22,8 +22,7 @@ It allows users to create, edit, and manage their notes.
 1. Clone the repository:
 
 ```sh
-git clone https://github.com/yourusername/easynotes.git
-cd easynotes
+https://github.com/rajsolanki907/EasyNotes.git
 ```
 
 2. Install the dependencies:
